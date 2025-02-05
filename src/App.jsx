@@ -5,16 +5,15 @@ function App() {
 
   // for every input we need a state
 
-  const [city, setCity] = useState("")
-  const [password,setPassword] = useState("")
-  const [firstName, setFirstName] = useState("")
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    password: ""
+  })
 
   function handleChange(event){
-    setCity(event.target.value)
-  }
-
-  function handleFirstNameChange(event){
-    setFirstName(event.target.value)
+    setFormData({...formData,[event.target.name]:event.target.value})
   }
 
   /* Steps:
@@ -25,29 +24,52 @@ function App() {
   
   */
 
+            function handleSubmit(event){
+              event.preventDefault()
+
+              alert("Success Created")
+
+              setFormData({
+                firstName: "",
+                lastName: "",
+                password: ""
+              })
+            }
 
   return (
     <>
-    <label htmlFor="cityInput">City</label>
-    <input
-      onChange={handleChange}
-      type="text" 
-      id='cityInput'
-      name="cityInput"
-      value={city} 
-      
-      />
 
-      <label htmlFor="">First name:</label>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="lastName">last Name</label>
       <input
-       type="text"
-       value = {firstName} 
-       onChange={handleFirstNameChange}/>
+        onChange={handleChange}
+        type="text" 
+        id='lastName'
+        name="lastName"
+        value={formData.lastName} 
+        
+        />
 
-    <label htmlFor="">password</label>
-    <input type="password" id='password' name='password' onChange={(event)=>{setPassword(event.target.value)}} />
+        <label htmlFor="">First name:</label>
+        <input
+        type="text"
+        name="firstName"
+        id='firstName'
+        value = {formData.firstName} 
+        onChange={handleChange}/>
 
-    {password.length <8 && <h1>Please input 8 characters</h1>}
+      <label htmlFor="">password</label>
+      <input 
+      value={formData.password}
+      type="password" 
+      id='password' 
+      name='password' 
+      onChange={handleChange} />
+
+      {formData.password.length <8 && <h1>Please input 8 characters</h1>}
+      <button>Submit</button>
+    </form>
+    
     </>
   )
 }
