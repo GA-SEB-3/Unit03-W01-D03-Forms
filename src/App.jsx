@@ -9,7 +9,8 @@ function App() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    password: ""
+    password: "",
+    
   })
 
   function handleChange(event){
