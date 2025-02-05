@@ -1,5 +1,7 @@
 import './App.css'
 import { useState } from 'react'
+import Books from './components/Books'
+import Summary from './components/Summary'
 
 function App() {
 
@@ -10,12 +12,45 @@ function App() {
     firstName: "",
     lastName: "",
     password: "",
-    
+
   })
+
+  const booksData = [
+    {
+      "id": "1ae23ef1",
+      "title": "Harry Potter",
+      "author":"JK Rowling"
+    },
+    {
+      "id": "1ae23ef2",
+      "title": "To Kill a Mokingbird",
+      "author": "Harper lee"
+    },
+    {
+      "id": "1ae23ef3",
+      "title": "The Lord of the Rings",
+      "author": "JR Tolkin"
+    },
+    {
+      "id": "1ae23ef4",
+      "title": "The Great Gatsby",
+      "author": "F Scott Gerald"
+    },
+    {
+      "id":"1ae23ef5",
+      "title":"The Art of War",
+      "author":"Sun Tzu"
+    }
+  ]
+
+  const [books, setBooks] = useState(booksData)
+  
 
   function handleChange(event){
     setFormData({...formData,[event.target.name]:event.target.value})
   }
+
+
 
   /* Steps:
             1. create a state for each input
@@ -37,9 +72,24 @@ function App() {
               })
             }
 
+      function helloClass(){
+        alert("Hello class")
+      }
+
+      function deleteBook(id){
+        
+        const filteredBooks = books.filter((oneBook)=>{
+
+          return oneBook.id !== id
+        })
+        console.log(filteredBooks)
+        setBooks(filteredBooks)
+
+      }
+
   return (
     <>
-
+{/* 
     <form onSubmit={handleSubmit}>
       <label htmlFor="lastName">last Name</label>
       <input
@@ -70,7 +120,10 @@ function App() {
       {formData.password.length <8 && <h1>Please input 8 characters</h1>}
       <button>Submit</button>
     </form>
-    
+     */}
+
+     <Books books = {books} deleteBook = {deleteBook}/>
+     <Summary books = {books} helloClass = {helloClass}/>
     </>
   )
 }

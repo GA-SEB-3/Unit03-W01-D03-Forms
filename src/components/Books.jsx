@@ -1,38 +1,17 @@
 import { useState } from "react"
 
-function Books(){
+function Books(props){
 
-    const booksData = [
-        {
-          "id": "1ae23ef1",
-          "title": "Harry Potter",
-          "author":"JK Rowling"
-        },
-        {
-          "id": "1ae23ef2",
-          "title": "To Kill a Mokingbird",
-          "author": "Harper lee"
-        },
-        {
-          "id": "1ae23ef3",
-          "title": "The Lord of the Rings",
-          "author": "JR Tolkin"
-        },
-        {
-          "id": "1ae23ef4",
-          "title": "The Great Gatsby",
-          "author": "F Scott Gerald"
-        },
-        {
-          "id":"1ae23ef5",
-          "title":"The Art of War",
-          "author":"Sun Tzu"
-        }
-      ]
-
-      const [books, setBooks] = useState(booksData)
+    
     return(
         <>
+        {props.books.map((oneBook)=>
+        <div key={oneBook.id}>
+            <h2>Book title:{oneBook.title}</h2>
+            <p>{oneBook.title}</p>
+            <button onClick={()=>{props.deleteBook(oneBook.id)}}>Delete Book</button>
+        </div>
+        )}
         </>
     )
 }
